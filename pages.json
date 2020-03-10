@@ -14,11 +14,7 @@
       "style": {
         "usingComponents": {
           "van-image": "/wxcomponents/vant/dist/image/index",
-          "van-overlay": "/wxcomponents/vant/dist/overlay/index",
-          "van-icon": "/wxcomponents/vant/dist/icon/index",
-          "van-goods-action": "/wxcomponents/vant/dist/goods-action/index",
-          "van-goods-action-icon": "/wxcomponents/vant/dist/goods-action-icon/index",
-          "van-goods-action-button": "/wxcomponents/vant/dist/goods-action-button/index",
+          "van-sticky": "/wxcomponents/vant/dist/sticky/index",
           "van-grid": "/wxcomponents/vant/dist/grid/index",
           "van-grid-item": "/wxcomponents/vant/dist/grid-item/index"
         },
@@ -28,6 +24,11 @@
     }, {
       "path": "pages/mine/index",
       "style": {
+        "usingComponents": {
+          "van-goods-action": "/wxcomponents/vant/dist/goods-action/index",
+          "van-goods-action-icon": "/wxcomponents/vant/dist/goods-action-icon/index",
+          "van-goods-action-button": "/wxcomponents/vant/dist/goods-action-button/index"
+        },
         "navigationBarTitleText": "我的",
         "enablePullDownRefresh": true
       }

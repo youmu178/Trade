@@ -1,27 +1,33 @@
 <template>
   <view class="body">
-    <!-- <van-overlay :show="show" z-index="99" @click="onClickHide">
-      <view class="wrapper">
-        <swiper class="swiper" circular :indicator-color="indicatorColor" :indicator-active-color="indicatorActiveColor">
-          <swiper-item v-for="item in img" :key="item.index"><image :src="item" lazy-load mode="widthFix" class="swiper-image"></image></swiper-item>
-        </swiper>
-        <van-goods-action>
-          <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" />
-          <van-goods-action-button text="加入购物车" type="warning" bind:click="onClickButton" />
-          <van-goods-action-button text="立即购买" bind:click="onClickButton" />
-        </van-goods-action>
+    <view class="head">
+      <van-image width="36" height="36" fit="cover" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
+      <view class="shop-info">
+        <text class="name">XXXX店铺</text>
+        <text class="doorplate">B-101</text>
       </view>
-    </van-overlay> -->
-    <view class="item" @click="itemClick(img)">
-      <view class="head">
-        <van-image width="36" height="36" fit="cover" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
-        <view class="shop-info">
-          <text class="name">XXXX店铺</text>
-          <text class="doorplate">B-101</text>
+    </view>
+    <van-sticky>
+      <view class="sort-tab">
+        <text @click="zongheClick" :class="{ clickp: zhClick }">综合排序</text>
+        <view class="tab-jiage">
+          <text @click="jiageClick" :class="{ clickp: jgClick }">价格排序</text>
+          <image :src="sortSrc" style="width: 5px; height: 10px;" />
         </view>
+        <text @click="xiaoliangClick" :class="{ clickp: xlClick }">销量排序</text>
       </view>
-      <van-grid column-num="3" square :border="true" gutter="5">
-        <van-grid-item use-slot v-for="item in img" :key="item.index"><image style="width: 100%;" lazy-load :src="item" /></van-grid-item>
+    </van-sticky>
+    <view class="list">
+      <van-grid column-num="2" gutter="5">
+        <van-grid-item use-slot v-for="item in img" :key="item.index" @click="itemClick(item)">
+          <view class="item-img"><image class="img-" lazy-load mode="aspectFit" :src="item" /></view>
+          <view class="jia">
+            <text class="zhekoujia">¥ 99.00</text>
+            <text class="yuanjia">¥ 999.00</text>
+            <text class="zhekou">1折</text>
+          </view>
+          <text class="title">testtesttesttesttesttesttesttesttesttest</text>
+        </van-grid-item>
       </van-grid>
     </view>
   </view>
@@ -34,6 +40,11 @@ export default {
       swiperData: [],
       indicatorColor: '#FFFFFF',
       indicatorActiveColor: '#F6411F',
+      zhClick: true,
+      xlClick: false,
+      jgClick: false,
+      isClickSort: false,
+      sortSrc: require('@/static/search/ic_sort_default.png'),
       img: [
         'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75',
         'https://gw.alicdn.com/bao/uploaded/i2/2206479918978/O1CN01N00v3R2GByRYeCD1v_!!0-item_pic.jpg_480x480Q75',
@@ -46,30 +57,43 @@ export default {
     };
   },
   onLoad() {
-    // this.getData();
+    // this.onRefresh();
   },
   onShow() {},
   onPullDownRefresh() {},
   methods: {
+    zongheClick() {
+      this.zhClick = true;
+      this.xlClick = false;
+      this.jgClick = false;
+      this.sortSrc = require('@/static/search/ic_sort_default.png');
+      // this.sort = 1;
+      this.onRefresh();
+    },
+    xiaoliangClick() {
+      this.zhClick = false;
+      this.xlClick = true;
+      this.jgClick = false;
+      this.sortSrc = require('@/static/search/ic_sort_default.png');
+      // this.sort = 2;
+      this.onRefresh();
+    },
+    jiageClick() {
+      this.zhClick = false;
+      this.xlClick = false;
+      this.jgClick = true;
+      this.isClickSort = !this.isClickSort;
+      this.sortSrc = this.isClickSort ? require('@/static/search/ic_sort_desc.png') : require('@/static/search/ic_sort_asc.png');
+      // this.sort = this.isClickSort ? 4 : 3;
+      this.onRefresh();
+    },
     itemClick(item) {
       let that = this;
       uni.navigateTo({
-      	url: '/pages/goods/detail'
+        url: '/pages/goods/detail'
       });
-      // uni.hideTabBar({
-      //   animation: true,
-      //   success() {
-      //     that.swiperData = item;
-      //     that.show = true;
-      //   }
-      // });
     },
-    // onClickHide() {
-    //   this.show = false;
-    //   uni.showTabBar({
-    //     animation: true
-    //   });
-    // },
+    onRefresh() {},
     getData() {
       uniCloud
         .callFunction({
@@ -103,11 +127,6 @@ export default {
   }
 };
 </script>
-<style>
-/* page {
-  background-color: #f5f5f5;
-} */
-</style>
 <style scoped lang="scss">
 .banner-item {
   height: 125px;
@@ -120,66 +139,108 @@ export default {
   & ::v-deep {
     .van-grid-item__content {
       padding: 0px;
-      // margin-top: 5px;
-      // margin-right: 5px;
+      background: rgba(255, 255, 255, 1) no-repeat;
+      overflow: hidden;
+      background-size: 100% 100%;
+      border-radius: 4px;
     }
     .van-grid-item {
-      margin-top: 0px !important;
+      // margin-top: 0px !important;
+    }
+    .van-grid-item__content--center {
+      align-items: flex-start;
     }
   }
 }
-.wrapper {
+.head {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
-  .swiper {
-    width: 100%;
-    height: 450px;
-    .swiper-image {
-      width: 100%;
-      height: 100%;
+  padding: 12px 0px 12px 8px;
+  // margin-bottom: 5px;
+  background-color: #ffffff;
+  .shop-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+    .name {
+      color: #232323;
+      font-size: 15px;
+    }
+    .doorplate {
+      color: #737373;
+      font-size: 12px;
     }
   }
-  // .cart {
-  //   display: flex;
-  //   width: 100%;
-  //   align-items: center;
-  //   padding-left: 20px;
-  //   .add {
-  //     color: white;
-  //     font-size: 18px;
-  //     position: absolute;
-  //     right: 10px;
-  //   }
-  // }
 }
-.item {
-  background: #ffffff;
-  border-radius: 8px;
-  margin: 10px 10px 0px 10px;
-  padding-bottom: 5px;
-  overflow: hidden;
-  .head {
+.sort-tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  // margin-top: 5px;
+  height: 40px;
+  background: white;
+  text {
+    color: #232323;
+  }
+  .clickp {
+    color: #f50000;
+  }
+  .tab-jiage {
     display: flex;
     align-items: center;
-    padding: 12px 0px 12px 8px;
-    margin-bottom: 5px;
-    background: linear-gradient(270deg, rgba(253, 235, 229, 1) 0%, rgba(255, 223, 213, 1) 100%);
-    .shop-info {
-      display: flex;
-      flex-direction: column;
+    image {
       margin-left: 5px;
-      .name {
-        color: #232323;
-        font-size: 15px;
-      }
-      .doorplate {
-        color: #737373;
-        font-size: 12px;
-      }
     }
+  }
+}
+.list {
+  margin: 10px 5px;
+  .item-img {
+    width: 100%;
+    height: 0px;
+    padding-bottom: 100%;
+    position: relative;
+    .img- {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+  }
+  .jia {
+    display: flex;
+    align-items: flex-end;
+    margin: 5px 2px 0px 10px;
+    .zhekoujia {
+      color: #f50000;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .yuanjia {
+      font-size: 12px;
+      color: #9c9c9c;
+      margin-left: 2px;
+      text-decoration: line-through;
+    }
+    .zhekou {
+      margin-left: 6px;
+      margin-bottom: 1px;
+      font-size: 10px;
+      color: #f2ca00;
+      border: solid 1px #ffd801;
+      border-radius: 3px;
+      padding: 0px 3px;
+    }
+  }
+  .title {
+    font-size: 14px;
+    margin: 2px 5px 8px 6px;
+    color: rgba(59, 59, 59, 1);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
   }
 }
 </style>
