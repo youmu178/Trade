@@ -15,7 +15,4 @@ export default {
 <style>
 @import '/wxcomponents/vant/dist/common/index.wxss';
 /*每个页面公共css */
-page {
-  background-color: #f5f5f5;
-}
 </style>

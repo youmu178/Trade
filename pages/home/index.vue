@@ -26,7 +26,7 @@
             <text class="yuanjia">¥ 999.00</text>
             <text class="zhekou">1折</text>
           </view>
-          <text class="title">testtesttesttesttesttesttesttesttesttest</text>
+          <text class="title">爵森马伯特男士春秋装上衣服潮流卫衣秋季男装男装男装</text>
         </van-grid-item>
       </van-grid>
     </view>
@@ -127,6 +127,11 @@ export default {
   }
 };
 </script>
+<style>
+page {
+  background-color: #f5f5f5;
+}
+</style>
 <style scoped lang="scss">
 .banner-item {
   height: 125px;
@@ -233,8 +238,9 @@ export default {
   }
   .title {
     font-size: 14px;
-    margin: 2px 5px 8px 6px;
-    color: rgba(59, 59, 59, 1);
+    margin: 2px 5px 12px 6px;
+    color: #3B3B3B;
+    // font-weight:500;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
