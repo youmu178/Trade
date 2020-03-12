@@ -64,6 +64,7 @@
       "path": "pages/mine/address-add",
       "style": {
         "usingComponents": {
+          "van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
           "van-area": "/wxcomponents/vant/dist/area/index"
         },
         "navigationBarTitleText": "新建收货地址"
