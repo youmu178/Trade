@@ -25,7 +25,7 @@
     </view>
     <view class="line"></view>
     <van-goods-action safe-area-inset-bottom class="goods-action">
-      <van-goods-action-icon class="cart-action" icon="cart-o" text="购物车" @click="onClickCart" />
+      <van-goods-action-icon class="cart-action" icon="cart-o" text="购物车" :info="cartNumber" @click="onClickCart" />
       <van-goods-action-button text="加入购物车" type="warning" @click="onClickAddCart" />
       <van-goods-action-button text="立即购买" @click="onClickBuy" />
     </van-goods-action>
@@ -41,6 +41,8 @@ export default {
       ccSelText: '',
       colorSelIndex: 0,
       colorSelText: '',
+      cartNumber: 0,
+      goodsNumber: 1,
       img: [
         'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75',
         'https://gw.alicdn.com/bao/uploaded/i2/2206479918978/O1CN01N00v3R2GByRYeCD1v_!!0-item_pic.jpg_480x480Q75',
@@ -67,11 +69,25 @@ export default {
       this.colorSelText = this.colorList[index];
     },
     onChangeNumber(event) {
-      console.log(event.detail);
+      this.goodsNumber = event.detail;
     },
     onClickCart() {},
-    onClickAddCart() {},
-    onClickBuy() {}
+    onClickAddCart() {
+      this.cartNumber++;
+    },
+    onClickBuy() {
+      let goods = {
+        img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75',
+        chicun: this.ccSelText,
+        color: this.colorSelText,
+        goodsNumber: this.goodsNumber,
+        money: '99.00',
+        title: '爵森马伯特男士春秋装上衣服潮流卫衣秋季男装2019新款潮爵森马伯特男士春秋装上衣服潮流卫衣秋季男装'
+      };
+      uni.navigateTo({
+        url: '/pages/goods/buy' + '?detail=' + encodeURIComponent(JSON.stringify(goods))
+      });
+    }
   }
 };
 </script>
@@ -79,7 +95,7 @@ export default {
 .goods-action {
   & ::v-deep {
     .van-button {
-      padding-left: 20px;
+      padding-left: 15px;
       margin-right: 30px;
     }
   }
@@ -159,7 +175,7 @@ export default {
     font-size: 13px;
   }
   .chicunsel {
-    background: #F6411F;
+    background: #f6411f;
     border-radius: 2px;
     color: #ffffff;
   }
@@ -181,7 +197,7 @@ export default {
     font-size: 13px;
   }
   .colorsel {
-    background: #F6411F;
+    background: #f6411f;
     border-radius: 2px;
     color: #ffffff;
   }
