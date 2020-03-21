@@ -1,6 +1,32 @@
 <template>
   <view class="body">
-    <button type="primary" @click="onSeletAddress">选择地址</button>
+    <view class="card">
+      <view class="item">
+        <text>姓名</text>
+        <input placeholder="收货人姓名" />
+      </view>
+      <view class="line"></view>
+      <view class="item">
+        <text>电话</text>
+        <input placeholder="收货人手机号" type="number"/>
+      </view>
+      <view class="line"></view>
+      <view class="item" @click="onSeletAddress">
+        <text>地区</text>
+        <input placeholder="选择省 / 市 / 区" disabled />
+      </view>
+      <view class="line"></view>
+      <view class="item">
+        <text>详细地址</text>
+        <input placeholder="街道门牌 楼房房间号等信息" />
+      </view>
+    </view>
+    <view class="card">
+      <view class="item">
+        <text class="switch-title">设为默认收货地址</text>
+        <switch color="#f50000" @change="switchChange" />
+      </view>
+    </view>
     <van-action-sheet :show="show" :round="round" :close-on-click-overlay="closeOverlay">
       <van-area :area-list="areaList" :columns-placeholder="columnsPlaceholder" @confirm="onAreaConfirm" @cancel="onAreaCancel" />
     </van-action-sheet>
@@ -33,6 +59,9 @@ export default {
     onAreaCancel() {
       this.show = false;
     },
+    switchChange(e) {
+      console.log('switch1 发生 change 事件，携带值为', e.target.value);
+    },
     onSubmit() {
       // this.submitLoading = true;
       // setTimeout(() => {
@@ -42,9 +71,15 @@ export default {
   }
 };
 </script>
-
+<style>
+page {
+  background-color: #f5f5f5;
+}
+</style>
 <style scoped lang="scss">
 .body {
+  padding-left: 15px;
+  padding-right: 15px;
   & ::v-deep {
     .van-picker__cancel {
       color: #494949;
@@ -52,6 +87,37 @@ export default {
     .van-picker__confirm {
       color: #f50000;
     }
+  }
+}
+.card {
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin-top: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
+  .item {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    text {
+      width: 90px;
+    }
+    input {
+      width: 100%;
+      margin-left: 10px;
+    }
+    .switch-title {
+      width: auto;
+    }
+    switch {
+      position: absolute;
+      right: 25px;
+    }
+  }
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: #f5f5f5;
   }
 }
 </style>
