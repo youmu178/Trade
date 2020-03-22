@@ -21,7 +21,18 @@
         "navigationBarTitleText": "首页",
         "enablePullDownRefresh": true
       }
-    }, {
+    },
+    {
+      "path": "pages/cart/index",
+      "style": {
+        "usingComponents": {
+          "van-image": "/wxcomponents/vant/dist/image/index",
+          "van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index"
+        },
+        "navigationBarTitleText": "购物车"
+      }
+    },
+    {
       "path": "pages/mine/index",
       "style": {
         "navigationBarTitleText": "我的",
@@ -55,7 +66,7 @@
       "path": "pages/mine/address",
       "style": {
         "usingComponents": {
-          
+          "van-button": "/wxcomponents/vant/dist/button/index"
         },
         "navigationBarTitleText": "收货地址"
       }
@@ -65,13 +76,12 @@
       "style": {
         "usingComponents": {
           "van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
-          "van-area": "/wxcomponents/vant/dist/area/index"
+          "van-area": "/wxcomponents/vant/dist/area/index",
+          "van-button": "/wxcomponents/vant/dist/button/index"
         },
         "navigationBarTitleText": "新建收货地址"
       }
     }
-    
-
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
@@ -81,15 +91,19 @@
   },
   "tabBar": {
     "backgroundColor": "white",
-    "borderStyle": "white",
+    "borderStyle": "black",
     "selectedColor": "#FF4A4A",
     "color": "#525252",
-    "height": "45",
     "list": [{
       "pagePath": "pages/home/index",
       "iconPath": "static/tab/ic_tab_coupon_uncheck.png",
       "selectedIconPath": "static/tab/ic_tab_coupon.png",
       "text": "首页"
+    }, {
+      "pagePath": "pages/cart/index",
+      "iconPath": "static/tab/ic_tab_coupon_uncheck.png",
+      "selectedIconPath": "static/tab/ic_tab_coupon.png",
+      "text": "购物车"
     }, {
       "pagePath": "pages/mine/index",
       "iconPath": "static/tab/ic_tab_mine_uncheck.png",

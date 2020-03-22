@@ -8,7 +8,7 @@
       <view class="line"></view>
       <view class="item">
         <text>电话</text>
-        <input placeholder="收货人手机号" type="number"/>
+        <input placeholder="收货人手机号" type="number" />
       </view>
       <view class="line"></view>
       <view class="item" @click="onSeletAddress">
@@ -24,9 +24,12 @@
     <view class="card">
       <view class="item">
         <text class="switch-title">设为默认收货地址</text>
-        <switch color="#f50000" @change="switchChange" />
+        <switch color="#f6411f" @change="switchChange" />
       </view>
     </view>
+
+    <button class="button-ok" style="margin-top: 30px;" type="primary">提交</button>
+    <button class="button-del">删除</button>
     <van-action-sheet :show="show" :round="round" :close-on-click-overlay="closeOverlay">
       <van-area :area-list="areaList" :columns-placeholder="columnsPlaceholder" @confirm="onAreaConfirm" @cancel="onAreaCancel" />
     </van-action-sheet>
@@ -119,5 +122,19 @@ page {
     height: 1px;
     background-color: #f5f5f5;
   }
+}
+button {
+  border-radius: 25px;
+  margin-bottom: 15px;
+}
+button:after {
+  border: 1px solid rgba(0, 0, 0, 0) !important;
+}
+.button-ok {
+  background-color: #f6411f;
+}
+
+.button-del {
+  background-color: #ffffff;
 }
 </style>
