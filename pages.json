@@ -30,7 +30,8 @@
           "van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index",
           "van-stepper": "/wxcomponents/vant/dist/stepper/index",
           "van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
-          "van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index"
+          "van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
+          "van-swipe-cell": "/wxcomponents/vant/dist/swipe-cell/index"
         },
         "navigationBarTitleText": "购物车"
       }

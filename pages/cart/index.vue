@@ -1,19 +1,23 @@
 <template>
   <view class="body">
-    <view v-for="(item, index) in itemList" :key="item.index">
-      <view class="item-goods">
-        <van-checkbox :value="item.checked" @change="onCheck" checked-color="#f6411f"></van-checkbox>
-        <van-image class="image" width="94" height="94" :src="item.img" lazy-load fit="cover" />
-        <view class="info">
-          <text class="title">爵森马伯特男士春秋装上衣服潮流卫衣秋季男装男装男装</text>
-          <text class="sort">XL 黑色</text>
-          <view class="money-stepper">
-            <text class="money">¥ 99.00</text>
-            <van-stepper value="1" min="1" max="10" @change="onChangeNumber" class="number-stepper" />
+    <van-checkbox-group :value="checkBoxResult" @change="onChange">
+      <view v-for="(item, index) in itemList" :key="item.index">
+        <view class="item-goods" @click.stop="itemClick(item)">
+          <view style="height: 50px; display: flex; align-items: center;" @click="onCheckClick">
+            <van-checkbox :name="index" ref="checkboxes" checked-color="#f6411f"></van-checkbox>
+          </view>
+          <van-image class="image" width="94" height="94" :src="item.img" lazy-load fit="cover" />
+          <view class="info">
+            <text class="title">爵森马伯特男士春秋装上衣服潮流卫衣秋季男装男装男装</text>
+            <text class="sort">XL 黑色</text>
+            <view class="money-stepper">
+              <text class="money">¥ 99.00</text>
+              <van-stepper value="1" min="1" max="10" @change="onChangeNumber" class="number-stepper" />
+            </view>
           </view>
         </view>
       </view>
-    </view>
+    </van-checkbox-group>
     <van-submit-bar :loading="submitLoading" :price="money" button-text="提交订单" @submit="onSubmit">
       <label class="radio" @click="onAllCheck">
         <radio color="#f6411f" :checked="allCheck" />
@@ -30,6 +34,7 @@ export default {
       submitLoading: false,
       money: 3050,
       allCheck: false,
+      checkBoxResult: [],
       list: [
         { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75' },
         { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75' },
@@ -55,41 +60,28 @@ export default {
         this.submitLoading = false;
       }, 1000);
     },
-    onCheckClick(index) {
-      console.log('----- ' + index);
-      this.itemList.forEach((item, pos) => {
-        console.log(pos);
-        if (index == pos) {
-          item.checked = true;
-        }
-        item.checked = true;
-      });
-    },
-    onCheck(event) {
-      // console.log(event);
+    onChange(event) {
       console.log(event.detail);
+      this.checkBoxResult = event.detail;
+      this.allCheck = this.checkBoxResult.length == this.itemList.length;
+    },
+    onCheckClick(event) {
       // console.log(event.currentTarget.dataset);
-      // this.itemList[0].checked = event.detail;
-      // console.log(this.$refs.checkbox);
-      // for (let pos in this.itemList) {
-      //   if (index == pos) {
-      //     // this.$refs.checkbox[index].toggle();
-      //   }
-      // }
-      
-      // console.log(this.$refs.checkbox[0].dataset);
-      // this.itemList.forEach((item, pos) => {
-      //   item.checked = true;
-      // });
-      this.itemList.forEach(item => {
-        item.checked = event.detail;
-      });
+      // console.log(this.$refs.checkboxes[index]);
     },
     onAllCheck() {
       this.allCheck = !this.allCheck;
-      this.itemList.forEach(item => {
-        item.checked = this.allCheck;
-      });
+      this.checkBoxResult = [];
+      let result = [];
+      if (this.allCheck) {
+        this.itemList.forEach((item, index) => {
+          result.push(index + '');
+          this.checkBoxResult = result;
+        });
+      }
+    },
+    itemClick(item) {
+      
     }
   }
 };
