@@ -2,7 +2,7 @@
   <view class="body">
     <van-checkbox-group :value="checkBoxResult" @change="onChange">
       <view v-for="(item, index) in itemList" :key="item.index">
-        <view class="item-goods" @click.stop="itemClick(item)">
+        <view class="item-goods" @click.stop="itemClick(item)" @touchstart="touchstart()" @touchend="touchend()">
           <view style="height: 50px; display: flex; align-items: center;" @click="onCheckClick">
             <van-checkbox :name="index" ref="checkboxes" checked-color="#f6411f"></van-checkbox>
           </view>
@@ -18,6 +18,7 @@
         </view>
       </view>
     </van-checkbox-group>
+    <van-dialog use-slot title="标题" :show="showDialog" show-cancel-button @close="onClose"></van-dialog>
     <van-submit-bar :loading="submitLoading" :price="money" button-text="提交订单" @submit="onSubmit">
       <label class="radio" @click="onAllCheck">
         <radio color="#f6411f" :checked="allCheck" />
@@ -35,6 +36,8 @@ export default {
       money: 3050,
       allCheck: false,
       checkBoxResult: [],
+      timeOutEvent: 0,
+      showDialog: false,
       list: [
         { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75' },
         { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75' },
@@ -80,8 +83,19 @@ export default {
         });
       }
     },
-    itemClick(item) {
-      
+    itemClick(item) {},
+    touchstart() {
+      this.timeOutEvent = setTimeout(() => {
+        this.timeOutEvent = 0;
+        this.showDialog = true;
+      }, 500);
+    },
+    touchend() {
+      clearTimeout(this.timeOutEvent);
+      this.timeOutEvent = 0;
+    },
+    onClose() {
+      this.showDialog = false;
     }
   }
 };
