@@ -27,7 +27,10 @@
       "style": {
         "usingComponents": {
           "van-image": "/wxcomponents/vant/dist/image/index",
-          "van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index"
+          "van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index",
+          "van-stepper": "/wxcomponents/vant/dist/stepper/index",
+          "van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
+          "van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index"
         },
         "navigationBarTitleText": "购物车"
       }
@@ -96,18 +99,18 @@
     "color": "#525252",
     "list": [{
       "pagePath": "pages/home/index",
-      "iconPath": "static/tab/ic_tab_coupon_uncheck.png",
-      "selectedIconPath": "static/tab/ic_tab_coupon.png",
+      "iconPath": "static/tab/home.png",
+      "selectedIconPath": "static/tab/home-on.png",
       "text": "首页"
     }, {
       "pagePath": "pages/cart/index",
-      "iconPath": "static/tab/ic_tab_coupon_uncheck.png",
-      "selectedIconPath": "static/tab/ic_tab_coupon.png",
+      "iconPath": "static/tab/cart.png",
+      "selectedIconPath": "static/tab/cart-on.png",
       "text": "购物车"
     }, {
       "pagePath": "pages/mine/index",
-      "iconPath": "static/tab/ic_tab_mine_uncheck.png",
-      "selectedIconPath": "static/tab/ic_tab_mine.png",
+      "iconPath": "static/tab/user.png",
+      "selectedIconPath": "static/tab/user-on.png",
       "text": "我的"
     }]
   }
