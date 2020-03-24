@@ -2,19 +2,25 @@
   <view class="body">
     <van-checkbox-group :value="checkBoxResult" @change="onChange">
       <view v-for="(item, index) in itemList" :key="item.index">
-        <view class="item-goods" @click.stop="itemClick(item)" @touchstart="touchstart()" @touchend="touchend()">
-          <view style="height: 50px; display: flex; align-items: center;" @click="onCheckClick">
-            <van-checkbox :name="index" ref="checkboxes" checked-color="#f6411f"></van-checkbox>
-          </view>
-          <van-image class="image" width="94" height="94" :src="item.img" lazy-load fit="cover" />
-          <view class="info">
-            <text class="title">爵森马伯特男士春秋装上衣服潮流卫衣秋季男装男装男装</text>
-            <text class="sort">XL 黑色</text>
-            <view class="money-stepper">
-              <text class="money">¥ 99.00</text>
-              <van-stepper value="1" min="1" max="10" @change="onChangeNumber" class="number-stepper" />
+        <!-- @touchstart="touchstart()" @touchend="touchend()" -->
+        <view class="item-goods" @click.stop="itemClick(item)">
+          <van-swipe-cell right-width="65">
+            <view class="item-swipe">
+              <view style="height: 50px; display: flex; align-items: center;" @click="onCheckClick">
+                <van-checkbox :name="index" ref="checkboxes" checked-color="#f6411f"></van-checkbox>
+              </view>
+              <van-image class="image" width="94" height="94" :src="item.img" lazy-load fit="cover" />
+              <view class="info">
+                <text class="title">爵森马伯特男士春秋装上衣服潮流卫衣秋季男装男装男装</text>
+                <text class="sort">XL 黑色</text>
+                <view class="money-stepper">
+                  <text class="money">¥ 99.00</text>
+                  <van-stepper value="1" min="1" max="10" @change="onChangeNumber" class="number-stepper" />
+                </view>
+              </view>
             </view>
-          </view>
+            <view slot="right" class="del" @click="itemDelClick(index)"><text>删除</text></view>
+          </van-swipe-cell>
         </view>
       </view>
     </van-checkbox-group>
@@ -40,11 +46,12 @@ export default {
       showDialog: false,
       list: [
         { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75' },
-        { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75' },
-        { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75' },
-        { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75' },
-        { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75' },
-        { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206479918978/O1CN018uvMW92GBySgyIic7_!!0-item_pic.jpg_480x480Q75' }
+        { img: 'https://gw.alicdn.com/bao/uploaded/i2/2206479918978/O1CN01N00v3R2GByRYeCD1v_!!0-item_pic.jpg_480x480Q75' },
+        { img: 'https://gw.alicdn.com/bao/uploaded/i1/3816165381/O1CN01Q4PHtO1pcXoQw3olL_!!0-item_pic.jpg_480x480Q75' },
+        { img: 'https://gw.alicdn.com/bao/uploaded/i4/3516851626/O1CN01ur82BD1NskYinadJE_!!0-item_pic.jpg_480x480Q75' },
+        { img: 'https://gw.alicdn.com/bao/uploaded/i3/3524443782/O1CN01bjNnGk1doCU6iys5B_!!0-item_pic.jpg_480x480Q75' },
+        { img: 'https://gw.alicdn.com/bao/uploaded/i1/2206617745862/O1CN01u1SACe1tAqK4BguQS_!!0-item_pic.jpg_480x480Q75' },
+        { img: 'https://gw.alicdn.com/bao/uploaded/i4/2201717159611/O1CN01c8hOq92Krt9eLzFVx_!!0-item_pic.jpg_480x480Q75' }
       ]
     };
   },
@@ -84,6 +91,9 @@ export default {
       }
     },
     itemClick(item) {},
+    itemDelClick(index) {
+      this.itemList.splice(index, 1);
+    },
     touchstart() {
       this.timeOutEvent = setTimeout(() => {
         this.timeOutEvent = 0;
@@ -115,12 +125,26 @@ page {
   }
 }
 .item-goods {
-  display: flex;
-  align-items: center;
   background-color: #ffffff;
   margin: 10px 10px 0px 10px;
-  padding: 10px 15px 5px 15px;
   border-radius: 5px;
+  overflow: hidden;
+  .del {
+    width: 65px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f6411f;
+    text {
+      color: #ffffff;
+    }
+  }
+  .item-swipe {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px 5px 15px;
+  }
   .image {
     margin-left: 15px;
     margin-right: 10px;
