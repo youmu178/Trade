@@ -71,7 +71,11 @@ export default {
     onChangeNumber(event) {
       this.goodsNumber = event.detail;
     },
-    onClickCart() {},
+    onClickCart() {
+      uni.switchTab({
+        url: '/pages/cart/index'
+      })
+    },
     onClickAddCart() {
       this.cartNumber++;
     },
