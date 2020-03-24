@@ -40,6 +40,12 @@
     {
       "path": "pages/mine/index",
       "style": {
+        "usingComponents": {
+          "van-image": "/wxcomponents/vant/dist/image/index",
+          "van-icon": "/wxcomponents/vant/dist/icon/index",
+          "van-cell": "/wxcomponents/vant/dist/cell/index",
+          "van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
+        },
         "navigationBarTitleText": "我的",
         "enablePullDownRefresh": true
       }
