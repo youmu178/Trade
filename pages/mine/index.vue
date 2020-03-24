@@ -5,7 +5,7 @@
       <text class="name">XXXX</text>
     </view>
     <view class="card">
-      <view class="order-title-view">
+      <view class="order-title-view" @click="orderClick">
         <text class="order-title">我的订单</text>
         <view class="order-title-all">
           <text class="order-all">查看全部订单</text>
@@ -48,7 +48,13 @@ export default {
     };
   },
   onLoad() {},
-  methods: {}
+  methods: {
+    orderClick() {
+      uni.navigateTo({
+        url: '/pages/mine/order'
+      })
+    }
+  }
 };
 </script>
 <style>

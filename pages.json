@@ -1,14 +1,5 @@
 {
   "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-    // {
-    //   "path": "pages/index/index",
-    //   "style": {
-    //     "usingComponents": {
-    //       "van-button": "/wxcomponents/vant/dist/button/index"
-    //     },
-    //     "navigationBarTitleText": "uni-app"
-    //   }
-    // }
     {
       "path": "pages/home/index",
       "style": {
@@ -91,6 +82,16 @@
           "van-button": "/wxcomponents/vant/dist/button/index"
         },
         "navigationBarTitleText": "新建收货地址"
+      }
+    },
+    {
+      "path": "pages/mine/order",
+      "style": {
+        "usingComponents": {
+          "van-tab": "/wxcomponents/vant/dist/tab/index",
+          "van-tabs": "/wxcomponents/vant/dist/tabs/index"
+        },
+        "navigationBarTitleText": "我的订单"
       }
     }
   ],
