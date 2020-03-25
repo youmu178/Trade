@@ -1,8 +1,8 @@
 <template>
   <view class="content">
-    <view class="head">
-      <van-image width="50" height="50" fit="cover" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
-      <text class="name">XXXX</text>
+    <view class="head" @click="getUserInfo">
+      <van-image width="50" height="50" fit="cover" round :src="avatarUrl" />
+      <text class="name">{{ nickName }}</text>
     </view>
     <view class="card">
       <view class="order-title-view" @click="orderClick(0)">
@@ -33,7 +33,7 @@
       </view>
     </view>
     <view class="card">
-      <van-cell title="我的地址" icon="location-o" is-link clickable @click="onAdressClick"/>
+      <van-cell title="我的地址" icon="location-o" is-link clickable @click="onAdressClick" />
       <van-cell title="我的积分" icon="medal-o" is-link clickable />
       <van-cell title="关于我们" icon="friends-o" is-link clickable />
     </view>
@@ -44,11 +44,41 @@
 export default {
   data() {
     return {
-      title: 'Hello'
+      nickName: '点击登录',
+      avatarUrl: 'https://img.yzcdn.cn/vant/cat.jpeg'
     };
   },
   onLoad() {},
   methods: {
+    getUserInfo() {
+      let that = this;
+      uni.getProvider({
+        service: 'oauth',
+        success(res) {
+          // console.log(res);
+          uni.login({
+            provider: 'weixin',
+            success(loginRes) {
+              console.log(loginRes.code);
+              uni.getUserInfo({
+                success(infoRes) {
+                  console.log(infoRes);
+                  that.nickName = infoRes.userInfo.nickName;
+                  that.avatarUrl = infoRes.userInfo.avatarUrl;
+                }
+              });
+            }
+          });
+        }
+      });
+
+      // uni.authorize({
+      //   scope: 'scope.userInfo',
+      //   success(loginRes) {
+      //     console.log(loginRes);
+      //   }
+      // });
+    },
     orderClick(index) {
       uni.navigateTo({
         url: '/pages/mine/order' + '?index=' + index
@@ -57,7 +87,7 @@ export default {
     onAdressClick() {
       uni.navigateTo({
         url: '/pages/mine/address'
-      })
+      });
     }
   }
 };
