@@ -110,11 +110,6 @@ export default {
   }
 };
 </script>
-<style>
-page {
-  background-color: #f5f5f5;
-}
-</style>
 <style scoped lang="scss">
 .body {
   margin-bottom: 65px;

@@ -95,6 +95,11 @@ export default {
   }
 };
 </script>
+<style>
+page {
+  background-color: #FFFFFF;
+}
+</style>
 <style scoped lang="scss">
 .goods-action {
   & ::v-deep {

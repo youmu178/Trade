@@ -68,7 +68,9 @@
       "path": "pages/mine/address",
       "style": {
         "usingComponents": {
-          "van-button": "/wxcomponents/vant/dist/button/index"
+          "van-button": "/wxcomponents/vant/dist/button/index",
+          "van-cell": "/wxcomponents/vant/dist/cell/index",
+          "van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
         },
         "navigationBarTitleText": "收货地址"
       }
@@ -89,7 +91,9 @@
       "style": {
         "usingComponents": {
           "van-tab": "/wxcomponents/vant/dist/tab/index",
-          "van-tabs": "/wxcomponents/vant/dist/tabs/index"
+          "van-tabs": "/wxcomponents/vant/dist/tabs/index",
+          "van-image": "/wxcomponents/vant/dist/image/index",
+          "van-button": "/wxcomponents/vant/dist/button/index"
         },
         "navigationBarTitleText": "我的订单"
       }

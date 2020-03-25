@@ -5,7 +5,7 @@
       <text class="name">XXXX</text>
     </view>
     <view class="card">
-      <view class="order-title-view" @click="orderClick">
+      <view class="order-title-view" @click="orderClick(0)">
         <text class="order-title">我的订单</text>
         <view class="order-title-all">
           <text class="order-all">查看全部订单</text>
@@ -14,28 +14,28 @@
       </view>
       <view class="line"></view>
       <view class="order-status">
-        <view class="order-item">
+        <view class="order-item" @click="orderClick(1)">
           <van-icon name="pending-payment" size="30" color="#4c4c4c" />
           <text>待付款</text>
         </view>
-        <view class="order-item">
+        <view class="order-item" @click="orderClick(2)">
           <van-icon name="paid" size="30" color="#4c4c4c" />
           <text>已付款</text>
         </view>
-        <view class="order-item">
+        <view class="order-item" @click="orderClick(3)">
           <van-icon name="logistics" size="30" color="#4c4c4c" />
           <text>已发货</text>
         </view>
-        <view class="order-item">
+        <view class="order-item" @click="orderClick(4)">
           <van-icon name="sign" size="30" color="#4c4c4c" />
           <text>已完成</text>
         </view>
       </view>
     </view>
     <view class="card">
-      <van-cell title="我的地址" icon="location-o" is-link clickable/>
-      <van-cell title="我的积分" icon="medal-o" is-link clickable/>
-      <van-cell title="关于我们" icon="friends-o" is-link clickable/>
+      <van-cell title="我的地址" icon="location-o" is-link clickable @click="onAdressClick"/>
+      <van-cell title="我的积分" icon="medal-o" is-link clickable />
+      <van-cell title="关于我们" icon="friends-o" is-link clickable />
     </view>
   </view>
 </template>
@@ -49,19 +49,19 @@ export default {
   },
   onLoad() {},
   methods: {
-    orderClick() {
+    orderClick(index) {
       uni.navigateTo({
-        url: '/pages/mine/order'
+        url: '/pages/mine/order' + '?index=' + index
+      });
+    },
+    onAdressClick() {
+      uni.navigateTo({
+        url: '/pages/mine/address'
       })
     }
   }
 };
 </script>
-<style>
-page {
-  background-color: #f5f5f5;
-}
-</style>
 <style scoped lang="scss">
 .content {
   .head {
