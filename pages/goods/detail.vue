@@ -58,6 +58,8 @@ export default {
   },
   onLoad(option) {
     console.log(option);
+    this.colorSelText = this.colorList[0];
+    this.ccSelText = this.chicunList[0];
   },
   methods: {
     onChicunClick(index) {

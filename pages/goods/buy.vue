@@ -60,7 +60,11 @@ export default {
   }
 };
 </script>
-
+<style>
+page {
+  background-color: #FFFFFF;
+}
+</style>
 <style scoped lang="scss">
 .empty-address {
   height: 100px;
