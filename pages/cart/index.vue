@@ -1,29 +1,38 @@
 <template>
   <view class="body">
-    <van-checkbox-group :value="checkBoxResult" @change="onChange">
-      <view v-for="(item, index) in itemList" :key="item.index">
-        <!-- @touchstart="touchstart()" @touchend="touchend()" -->
-        <view class="item-goods" @click.stop="itemClick(item)">
-          <van-swipe-cell right-width="65">
-            <view class="item-swipe">
-              <view style="height: 50px; display: flex; align-items: center;" @click="onCheckClick">
-                <van-checkbox :name="index" ref="checkboxes" checked-color="#f6411f"></van-checkbox>
-              </view>
-              <van-image class="image" width="94" height="94" :src="item.img" lazy-load fit="cover" />
-              <view class="info">
-                <text class="title">爵森马伯特男士春秋装上衣服潮流卫衣秋季男装男装男装</text>
-                <text class="sort">XL 黑色</text>
-                <view class="money-stepper">
-                  <text class="money">¥ 99.00</text>
-                  <van-stepper value="1" min="1" max="10" @change="onChangeNumber" class="number-stepper" />
+    <view class="title-view-sticky">
+      <view class="title-view">
+        <van-icon name="shop-o" size="22px" />
+        <text>XXX的店</text>
+        <text class="edit">编辑</text>
+      </view>
+    </view>
+    <view style="padding-top: 40px;">
+      <van-checkbox-group :value="checkBoxResult" @change="onChange">
+        <view v-for="(item, index) in itemList" :key="item.index">
+          <!-- @touchstart="touchstart()" @touchend="touchend()" -->
+          <view class="item-goods" @click.stop="itemClick(item)">
+            <van-swipe-cell right-width="65">
+              <view class="item-swipe">
+                <view style="height: 50px; display: flex; align-items: center;" @click="onCheckClick">
+                  <van-checkbox :name="index" ref="checkboxes" checked-color="#f6411f"></van-checkbox>
+                </view>
+                <van-image class="image" width="94" height="94" :src="item.img" lazy-load fit="cover" />
+                <view class="info">
+                  <text class="title">爵森马伯特男士春秋装上衣服潮流卫衣秋季男装男装男装</text>
+                  <text class="sort">XL 黑色</text>
+                  <view class="money-stepper">
+                    <text class="money">¥ 99.00</text>
+                    <van-stepper value="1" min="1" max="10" @change="onChangeNumber" class="number-stepper" />
+                  </view>
                 </view>
               </view>
-            </view>
-            <view slot="right" class="del" @click="itemDelClick(index)"><text>删除</text></view>
-          </van-swipe-cell>
+              <view slot="right" class="del" @click="itemDelClick(index)"><text>删除</text></view>
+            </van-swipe-cell>
+          </view>
         </view>
-      </view>
-    </van-checkbox-group>
+      </van-checkbox-group>
+    </view>
     <van-dialog use-slot title="标题" :show="showDialog" show-cancel-button @close="onClose"></van-dialog>
     <van-submit-bar :loading="submitLoading" :price="money" button-text="提交订单" @submit="onSubmit">
       <label class="radio" @click="onAllCheck">
@@ -117,6 +126,32 @@ export default {
     // .van-submit-bar__bar {
     //   margin-bottom: 1px;
     // }
+  }
+}
+.title-view-sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #ffffff;
+  height: 40px;
+  z-index: 99;
+  .title-view {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    height: 100%;
+    text {
+      color: #686868;
+      font-size: 14px;
+      padding-left: 5px;
+    }
+    .edit {
+      position: absolute;
+      right: 0;
+      height: 40px;
+      padding-right: 20px;
+      line-height: 40px;
+    }
   }
 }
 .item-goods {
